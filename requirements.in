@@ -1,0 +1,6 @@
+click
+dataset
+python-dotenv
+dsnparse
+
+psycopg2-binary

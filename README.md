@@ -1,7 +1,5 @@
 # Control scripts applied to a database
 
-# the need
-
 I imagine that you have had the situation of creating a script to fix a database
 this script you run it once, and then the system or the database is
 already working fine.
@@ -15,3 +13,18 @@ When you bring a backup, you have to apply all the scripts you already used on
 the system/database to bring it up to par with the others.
 
 How do you keep track of the applied scripts ? 
+
+```
+ctrls add <file>
+ctrls add-dir <path>
+```
+
+
+Doing this It will create a table in the database called: `__ctrl_scripts_applied`
+
+
+The database connection its taken from a variable environment or `.env` of
+
+```
+DATABASE_URL=
+```

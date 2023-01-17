@@ -20,6 +20,15 @@ ctrls add-dir <path>
 ```
 
 
+what about the status?
+
+```
+ctrls status <path>
+```
+
+This command will give you the actual status of the script if it was applied or dont.
+
+
 Doing this It will create a table in the database called: `__ctrl_scripts_applied`
 
 
@@ -27,4 +36,10 @@ The database connection its taken from a variable environment or `.env` of
 
 ```
 DATABASE_URL=
+```
+
+## For install
+
+```
+pip install https://github.com/zodman/ctrl-scripts/archive/refs/heads/main.zip
 ```

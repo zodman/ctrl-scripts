@@ -11,13 +11,14 @@ load_dotenv(dotenv_path=os.path.join(os.getcwd(), '.env'), verbose=True)
 DATABASE_URL = os.getenv('DATABASE_URL')
 parsed_url = dsnparse.parse(DATABASE_URL)
 db = dataset.connect(DATABASE_URL)
-
-script_table = db['__ctrl_scripts_applied']
+table_name ='__ctrl_scripts_applied'
+script_table = db[table_name]
 
 
 @click.group()
 def cli():
-    click.secho(f'using {parsed_url.scheme}://{parsed_url.hostloc}', fg='red')
+    click.secho(f':: 🎛️   Ctrl-S - control scripts applied ::')
+    click.secho(f'Using {parsed_url.scheme}://{parsed_url.hostloc}/{parsed_url.paths[0]}?table={table_name}', fg='red')
 
 
 @cli.command()
@@ -32,10 +33,23 @@ def add(filename):
 @click.argument('path', type=click.Path())
 @click.pass_context
 def add_dir(ctx, path):
-    for root, dir, files in os.walk(path):
+    for root, _, files in os.walk(path):
         for file in files:
             filename = os.path.join(root,file)
             ctx.invoke(add, filename=filename)
+
+
+@cli.command()
+@click.argument('path', type=click.Path())
+def status(path):
+    for root, _, files in os.walk(path):
+        for file in files:
+            filename = os.path.join(root, file)
+            exists =script_table.find_one(script_name=filename)
+            applied = exists is not None 
+            click.secho(f"{'*' if applied else  ' '} {file}", bold=applied)
+    
+
 
 if __name__ == "__main__":
     cli()

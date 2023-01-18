@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 setup(
-    name='ctrl-scripts',
+    name='ctrls',
     version='0.1.0',
     py_modules=['ctrls'],
     install_requires=required,

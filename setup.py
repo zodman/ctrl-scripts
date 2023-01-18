@@ -14,4 +14,5 @@ setup(
             'ctrls=ctrls:cli',
         ],
     },
+    url="https://github.com/zodman/ctrl-scripts",
 )

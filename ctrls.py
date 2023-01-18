@@ -9,6 +9,11 @@ import datetime
 load_dotenv(dotenv_path=os.path.join(os.getcwd(), '.env'), verbose=True)
 
 DATABASE_URL = os.getenv('DATABASE_URL')
+
+if not DATABASE_URL:
+    click.secho('DATABASE_URL env missing')
+    exit(1)
+
 parsed_url = dsnparse.parse(DATABASE_URL)
 db = dataset.connect(DATABASE_URL)
 table_name ='__ctrl_scripts_applied'

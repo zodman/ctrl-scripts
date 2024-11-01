@@ -3,4 +3,4 @@ dataset
 python-dotenv
 dsnparse
 
-psycopg2-binary
+# psycopg2-binary
